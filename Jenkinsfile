@@ -11,6 +11,14 @@ pipeline {
             }
         }
 
+        stage('Stop Existing Containers') {
+            steps {
+                dir('hvac-complete') {
+                    bat 'docker compose down'
+                }
+            }
+        }
+
         stage('Run Application') {
             steps {
                 dir('hvac-complete') {
