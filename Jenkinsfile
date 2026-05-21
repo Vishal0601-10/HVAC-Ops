@@ -1,13 +1,6 @@
 pipeline {
-    agent any
 
     stages {
-
-        stage('Clone') {
-            steps {
-                git 'https://github.com/Vishal0601-10/HVAC-Ops.git'
-            }
-        }
 
         stage('Build Backend') {
             steps {
@@ -23,9 +16,15 @@ pipeline {
             }
         }
 
-        stage('Run Containers') {
+        stage('Start Containers') {
             steps {
                 bat 'docker compose up -d'
+            }
+        }
+
+        stage('Check Containers') {
+            steps {
+                bat 'docker ps'
             }
         }
 
