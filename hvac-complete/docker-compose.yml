@@ -30,7 +30,7 @@ services:
       SECRET_KEY: hvac-change-this-secret-key-in-production-2024
       TOKEN_EXPIRE_MINUTES: "480"
     ports:
-      - "8000:8000"
+      - "8001:8000"
     depends_on:
       db:
         condition: service_healthy
