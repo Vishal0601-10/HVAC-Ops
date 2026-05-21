@@ -3,31 +3,26 @@ pipeline {
 
     stages {
 
-        stage('Build Backend') {
+        stage('Build Application') {
             steps {
-                bat 'docker build -t hvac-backend .'
-            }
-        }
-
-        stage('Build Frontend') {
-            steps {
-                dir('frontend') {
-                    bat 'docker build -t hvac-frontend .'
+                dir('hvac-complete') {
+                    bat 'docker compose build'
                 }
             }
         }
 
-        stage('Start Containers') {
+        stage('Run Application') {
             steps {
-                bat 'docker compose up -d'
+                dir('hvac-complete') {
+                    bat 'docker compose up -d'
+                }
             }
         }
 
-        stage('Check Containers') {
+        stage('Verify Containers') {
             steps {
                 bat 'docker ps'
             }
         }
-
     }
 }
